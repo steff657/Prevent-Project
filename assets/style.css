@@ -1,0 +1,272 @@
+/* CYBERPUNK THEME - assets/style.css */
+
+/* --- CORE COLOR PALETTE & FONTS --- */
+
+:root {
+    /* Primary (Dark/Background) */
+    --color-dark: #0A0A1A;
+    --color-dark-alt: #16162A;
+    /* Neon Accents */
+    --color-neon-blue: #00FFFF;
+    --color-neon-pink: #FF00FF;
+    --color-neon-green: #39FF14;
+    /* Text Color */
+    --color-light: #C0C0C0;
+}
+
+/* Apply Dark Background and Light/Neon Text */
+body {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    font-family: 'Consolas', 'Courier New', monospace; 
+    transition: background-color 0.5s, color 0.5s;
+}
+/* Ensure all text elements use the light color */
+p, li, a {
+    color: var(--color-light); 
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* --- TYPOGRAPHY & HEADINGS --- */
+
+/* All headings get a neon color and shadow */
+h1, h2, h3, h4, h5 {
+    color: var(--color-neon-blue);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Emphasis on the main hero title */
+header h1 {
+    color: var(--color-neon-pink);
+    text-shadow: 0 0 10px var(--color-neon-pink), 0 0 20px rgba(255, 0, 255, 0.4);
+    letter-spacing: 0.15em;
+}
+
+/* Lead text should contrast slightly */
+.lead {
+    color: var(--color-neon-green);
+    font-style: italic;
+}
+
+/* --- 3. BOOTSTRAP OVERRIDES --- */
+
+/* Navbar theme */
+.navbar {
+    border-bottom: 2px solid var(--color-neon-blue);
+    box-shadow: 0 0 10px var(--color-neon-blue);
+    background-color: var(--color-dark-alt) !important;
+}
+
+.navbar-brand, .nav-link {
+    color: var(--color-light) !important;
+    text-transform: uppercase;
+}
+
+.nav-link:hover {
+    color: var(--color-neon-pink) !important;
+    text-shadow: 0 0 5px var(--color-neon-pink);
+}
+
+/* Sections */
+section {
+    background-color: var(--color-dark) !important;
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2); /* Horizontal separators */
+}
+
+/* Hero Section */
+#intro {
+    background-color: var(--color-dark-alt) !important; 
+    border: 3px solid var(--color-neon-blue);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5) inset, 0 0 10px var(--color-neon-blue);
+    padding: 3rem !important; 
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-dark-alt) !important;
+    color: var(--color-neon-green) !important;
+    border-top: 2px solid var(--color-neon-green);
+    font-size: 0.85rem;
+    padding: 1.5rem 0 !important;
+}
+
+/* --- 4. COMPONENTS --- */
+
+/* LIST GROUPS: Glowing system components */
+.list-group-item {
+    background-color: var(--color-dark-alt);
+    border: 1px solid var(--color-neon-blue);
+    margin-bottom: 5px;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    
+    /* ADDED: Forces the text color to the light/neon primary */
+    color: var(--color-neon-green) !important; 
+}
+
+.list-group-item:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 8px var(--color-neon-blue);
+    transform: translateY(-2px);
+}
+
+/* UNORDERED LISTS (for risks): Differentiating points with neon color */
+#risks ul {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0;
+}
+
+#risks ul li {
+    padding-left: 1.2em;
+    position: relative;
+    color: var(--color-light);
+    line-height: 1.5;
+}
+
+/* Custom neon bullet point using the ::before pseudo-element */
+#risks ul li::before {
+    content: '>>'; /* Terminal-style bullet */
+    color: var(--color-neon-pink);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* CAROUSEL: Glass or HUD-like appearance */
+.carousel {
+    border: 1px solid rgba(255, 0, 255, 0.3);
+    background-color: rgba(10, 10, 26, 0.5); /* Semi-transparent background */
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
+.carousel-caption h5, .carousel-caption p {
+    color: var(--color-neon-green);
+    background-color: rgba(0, 0, 0, 0.5); /* Darker text background for legibility */
+    padding: 5px;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(0, 255, 255, 0.5);
+    border-radius: 5px;
+}
+
+/* --- 5. BUTTONS (CALL TO ACTION) --- */
+
+/* General button styling to achieve a 'glowing' component look */
+.btn {
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0; /* Sharp edges */
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    box-shadow: none !important; /* Remove default Bootstrap shadows first */
+}
+
+/* Primary Button (Local Prevent Team) */
+.btn-primary {
+    background-color: var(--color-neon-blue);
+    border-color: var(--color-neon-blue);
+    color: var(--color-dark); /* Dark text on neon */
+    box-shadow: 0 0 10px var(--color-neon-blue);
+}
+
+.btn-primary:hover {
+    background-color: #33FFFF; 
+    border-color: #33FFFF;
+    box-shadow: 0 0 15px #33FFFF;
+    transform: scale(1.05);
+}
+
+/* Danger Button (Report Online) */
+.btn-danger {
+    background-color: var(--color-neon-pink);
+    border-color: var(--color-neon-pink);
+    color: var(--color-dark);
+    box-shadow: 0 0 10px var(--color-neon-pink);
+}
+
+.btn-danger:hover {
+    background-color: #FF33FF;
+    border-color: #FF33FF;
+    box-shadow: 0 0 15px #FF33FF;
+    transform: scale(1.05);
+}
+
+/* Secondary Button (Learn More) */
+.btn-secondary {
+    background-color: var(--color-dark-alt);
+    border-color: var(--color-neon-green);
+    color: var(--color-neon-green);
+    box-shadow: 0 0 5px var(--color-neon-green);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(57, 255, 20, 0.2);
+    box-shadow: 0 0 10px var(--color-neon-green);
+    transform: scale(1.05);
+}
+
+/* STATUS ALERT: System message style */
+#locStatus {
+    transition: all 0.3s ease-in-out;
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: 0;
+    /* Overrides for Bootstrap alerts to fit theme */
+}
+
+.alert-info {
+    background-color: rgba(0, 255, 255, 0.2);
+    border-color: var(--color-neon-blue);
+    color: var(--color-neon-blue);
+}
+
+.alert-success {
+    background-color: rgba(57, 255, 20, 0.2);
+    border-color: var(--color-neon-green);
+    color: var(--color-neon-green);
+}
+
+.alert-warning {
+    background-color: rgba(255, 255, 0, 0.2);
+    border-color: #FFFF00;
+    color: #FFFF00;
+}
+
+/* --- 6. IMAGES --- */
+
+/* Give images a subtle, digital, screen-like border */
+header img {
+    max-height: 300px;
+    object-fit: cover;
+    border: 2px dashed var(--color-neon-blue);
+    box-shadow: 0 0 10px var(--color-neon-blue);
+    filter: brightness(0.8) saturate(1.2); /* Subtle digital processing look */
+    border-radius: 0 !important; /* Override Bootstrap rounded */
+}
+
+/* Carousel image styling */
+.carousel-item img {
+    max-height: 420px;
+    object-fit: cover;
+}
+
+/* --- 7. MEDIA QUERIES --- */
+
+/* Custom media query example */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+}

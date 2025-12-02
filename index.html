@@ -235,28 +235,36 @@
     "Redcar and Cleveland": "https://www.redcar-cleveland.gov.uk/residents/crime-and-community-safety/prevent-strategy-and-channel-process",
 };
 
+    // DOM ELEMENTS
     const locBtn = document.getElementById('findLocalBtn');
     const statusBox = document.getElementById('locStatus');
 
-        locBtn.addEventListener('click', function() {
-
-            if (!navigator.geolocation) {
+    // EVENT LISTENER FOR BUTTON
+    locBtn.addEventListener('click', function() {
+        
+        // Check for browser support
+        if (!navigator.geolocation) {
             showStatus("Geolocation is not supported by your browser.", "danger");
             return;
         }
 
+        // Update UI to show locating status
         showStatus("Locating your position...", "info");
         locBtn.disabled = true; 
 
-                navigator.geolocation.getCurrentPosition(onPositionSuccess, onPositionError);
+        // Get Coordinates
+        navigator.geolocation.getCurrentPosition(onPositionSuccess, onPositionError);
+    });
 
-                function onPositionSuccess(position) {
+    // Success handler
+    function onPositionSuccess(position) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
+        
+        // Call OpenStreetMap (Nominatim) API to get text address
+        const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
 
-                const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
-
-                fetch(apiUrl)
+        fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
                 const address = data.address;
@@ -272,12 +280,14 @@
             });
     }
 
+    // Error handler
     function onPositionError(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
         showStatus("Location access denied or unavailable. Please use the search bar.", "warning");
         locBtn.disabled = false;
     }
 
+    // Fuzzy match area name and redirect if found
     function matchAndRedirect(areaName) {
         let targetUrl = null;
         let matchedName = "";
