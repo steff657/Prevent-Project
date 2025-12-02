@@ -244,3 +244,12 @@
             showStatus("Geolocation is not supported by your browser.", "danger");
             return;
         }
+
+        showStatus("Locating your position...", "info");
+        locBtn.disabled = true; 
+
+                navigator.geolocation.getCurrentPosition(onPositionSuccess, onPositionError);
+
+                function onPositionSuccess(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
