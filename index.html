@@ -6,6 +6,7 @@
     <title>Prevent Strategy – System Interface</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
@@ -14,7 +15,8 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark **fixed-top**" aria-label="Main Navigation">    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" aria-label="Main Navigation"> 
+    <div class="container-fluid">
         <a class="navbar-brand" href="#top">Prevent Overview</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav"
@@ -266,7 +268,6 @@
 
 <script>
 
-    // council links to local prevent pages
     const councilData = {
     "Doncaster": "https://www.doncaster.gov.uk/services/community-safety/prevent",
     "Manchester": "https://www.manchester.gov.uk/info/200030/crime_antisocial_behaviour_and_nuisance/6429/prevent",
@@ -287,64 +288,56 @@
     "Redcar and Cleveland": "https://www.redcar-cleveland.gov.uk/residents/crime-and-community-safety/prevent-strategy-and-channel-process",
 };
 
-    // DOM ELEMENTS
     const locBtn = document.getElementById('findLocalBtn');
     const statusBox = document.getElementById('locStatus');
+    const requestForm = document.getElementById('requestForm');
+    const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
 
-    // EVENT LISTENER FOR BUTTON
+
     locBtn.addEventListener('click', function() {
         
-        // Check for browser support
         if (!navigator.geolocation) {
-            showStatus("Geolocation is not supported by your browser.", "danger");
+            displayLocStatus("Geolocation is not supported by your browser.", "danger");
             return;
         }
 
-        // Update UI to show locating status
-        showStatus("Locating your position...", "info");
+        displayLocStatus("Locating your position...", "info");
         locBtn.disabled = true; 
 
-        // Get Coordinates
-        navigator.geolocation.getCurrentPosition(onPositionSuccess, onPositionError);
+        navigator.geolocation.getCurrentPosition(handlePositionSuccess, handlePositionError);
     });
 
-    // Success handler
-    function onPositionSuccess(position) {
+    function handlePositionSuccess(position) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         
-        // Call OpenStreetMap (Nominatim) API to get text address
         const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
 
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
                 const address = data.address;
-                // Try to find the city, town, or borough name
                 const detectedArea = address.city || address.town || address.borough || address.county || "Unknown";
                 
-                matchAndRedirect(detectedArea);
+                matchAreaAndRedirect(detectedArea);
             })
             .catch(error => {
-                console.error(error);
-                showStatus("Error retrieving map data. Please search manually.", "warning");
+                console.error("Geocoding Error:", error);
+                displayLocStatus("Error retrieving map data. Please search manually.", "warning");
                 locBtn.disabled = false;
             });
     }
 
-    // Error handler
-    function onPositionError(err) {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-        showStatus("Location access denied or unavailable. Please use the search bar.", "warning");
+    function handlePositionError(err) {
+        console.warn(`Geolocation ERROR(${err.code}): ${err.message}`);
+        displayLocStatus("Location access denied or unavailable. Please use the National Report link or Contact Form.", "warning");
         locBtn.disabled = false;
     }
 
-    // Fuzzy match area name and redirect if found
-    function matchAndRedirect(areaName) {
+    function matchAreaAndRedirect(areaName) {
         let targetUrl = null;
         let matchedName = "";
 
-        // Fuzzy match: Check if 'Manchester' is inside 'Manchester City Council' or vice versa
         for (const [key, url] of Object.entries(councilData)) {
             if (areaName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(areaName.toLowerCase())) {
                 targetUrl = url;
@@ -354,55 +347,39 @@
         }
 
         if (targetUrl) {
-            showStatus(`Location found: ${areaName}. Redirecting to ${matchedName} Prevent page...`, "success");
+            displayLocStatus(`Location found: <strong>${areaName}</strong>. Redirecting to ${matchedName} Prevent page...`, "success");
             setTimeout(() => {
                 window.location.href = targetUrl;
-            }, 1500); // Short delay so user can read the message
+            }, 1500);
         } else {
-            showStatus(`We located you in <strong>${areaName}</strong>, but we don't have a direct link for this council yet.`, "warning");
+            displayLocStatus(`We located you in <strong>${areaName}</strong>, but we don't have a direct council link yet.`, "warning");
             locBtn.disabled = false;
         }
     }
 
-    // Show Status Messages
-    function showStatus(message, type) {
+    function displayLocStatus(message, type) {
         statusBox.classList.remove('d-none', 'alert-info', 'alert-success', 'alert-danger', 'alert-warning');
         statusBox.classList.add(`alert-${type}`);
         statusBox.innerHTML = message;
     }
 
 
-    /* --- NEW CONTACT FORM SUBMISSION LOGIC --- */
-
-    // Get DOM elements for the form and modal
-    const requestForm = document.getElementById('requestForm');
-    // Initialize the Bootstrap Modal object
-    const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-
-    // Event Listener for Contact Form Submission
     requestForm.addEventListener('submit', function(event) {
-        // THIS IS THE CRITICAL LINE: Stop the default form submission (page reload)
         event.preventDefault(); 
 
-        // Check if the form passes HTML5 validation (required fields filled)
         if (requestForm.checkValidity()) {
             
-            // 1. Show the confirmation modal
             confirmationModal.show();
 
-            // 2. Clear the form fields after a slight delay
             setTimeout(() => {
                 requestForm.reset();
-                requestForm.classList.remove('was-validated'); // Clear validation visual if present
+                requestForm.classList.remove('was-validated');
             }, 500);
             
         } else {
-            // If validation fails, show the visual feedback (e.g., red borders on missing fields)
             requestForm.classList.add('was-validated');
         }
     });
-
-    /* --- END OF NEW CONTACT FORM SUBMISSION LOGIC --- */
 
 </script>
 </body>

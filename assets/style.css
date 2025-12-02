@@ -1,42 +1,31 @@
-/* CYBERPUNK THEME - assets/style.css */
-
-/* --- CORE COLOR PALETTE & FONTS --- */
-
 :root {
-    /* Primary (Dark/Background) */
     --color-dark: #0A0A1A;
     --color-dark-alt: #16162A;
-    /* Neon Accents */
+    --color-light: #C0C0C0;
     --color-neon-blue: #00FFFF;
     --color-neon-pink: #FF00FF;
     --color-neon-green: #39FF14;
-    /* Text Color */
-    --color-light: #C0C0C0;
+    --color-neon-blue-light: #33FFFF;
+    --color-neon-pink-light: #FF33FF;
+    --color-neon-yellow: #FFFF00;
 }
 
-/* Apply Dark Background and Light/Neon Text */
 body {
     background-color: var(--color-dark);
     color: var(--color-light);
-    font-family: 'Consolas', 'Courier New', monospace; 
+    font-family: 'Space Mono', 'Consolas', 'Courier New', monospace; 
     transition: background-color 0.5s, color 0.5s;
-    /* FIX: Added top padding to prevent content from hiding behind the fixed navbar */
     padding-top: 80px; 
 }
-/* Ensure all text elements use the light color */
-p, li, a {
-    color: var(--color-light); 
-}
 
-/* Smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
 
+p, li, a {
+    color: var(--color-light); 
+}
 
-/* --- TYPOGRAPHY & HEADINGS --- */
-
-/* All headings get a neon color and shadow */
 h1, h2, h3, h4, h5 {
     color: var(--color-neon-blue);
     text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
@@ -44,66 +33,68 @@ h1, h2, h3, h4, h5 {
     text-transform: uppercase;
 }
 
-/* Emphasis on the main hero title */
 header h1 {
     color: var(--color-neon-pink);
     text-shadow: 0 0 10px var(--color-neon-pink), 0 0 20px rgba(255, 0, 255, 0.4);
     letter-spacing: 0.15em;
 }
 
-/* Lead text should contrast slightly */
 .lead {
     color: var(--color-neon-green);
     font-style: italic;
 }
 
-/* --- 3. BOOTSTRAP OVERRIDES --- */
-
-/* Navbar theme */
 .navbar {
     border-bottom: 2px solid var(--color-neon-blue);
     box-shadow: 0 0 10px var(--color-neon-blue);
-    background-color: var(--color-dark-alt) !important;
+    background-color: var(--color-dark-alt); 
+}
+
+.navbar-expand-lg.navbar-dark {
+    background-color: var(--color-dark-alt);
 }
 
 .navbar-brand, .nav-link {
-    color: var(--color-light) !important;
+    color: var(--color-light);
     text-transform: uppercase;
 }
 
 .nav-link:hover {
-    color: var(--color-neon-pink) !important;
+    color: var(--color-neon-pink);
     text-shadow: 0 0 5px var(--color-neon-pink);
 }
 
-/* Sections */
-section {
-    background-color: var(--color-dark) !important;
-    padding-top: 4rem !important;
-    padding-bottom: 4rem !important;
-    border-bottom: 1px solid rgba(0, 255, 255, 0.2); /* Horizontal separators */
-}
-
-/* Hero Section */
 #intro {
-    background-color: var(--color-dark-alt) !important; 
+    background-color: var(--color-dark-alt); 
     border: 3px solid var(--color-neon-blue);
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.5) inset, 0 0 10px var(--color-neon-blue);
-    padding: 3rem !important; 
+    padding: 3rem; 
 }
 
-/* Footer */
+header img {
+    max-height: 300px;
+    object-fit: cover;
+    border: 2px dashed var(--color-neon-blue);
+    box-shadow: 0 0 10px var(--color-neon-blue);
+    filter: brightness(0.8) saturate(1.2);
+    border-radius: 0;
+}
+
+section {
+    background-color: var(--color-dark);
+    padding-top: 4rem; 
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
 footer {
-    background-color: var(--color-dark-alt) !important;
-    color: var(--color-neon-green) !important;
+    background-color: var(--color-dark-alt);
+    color: var(--color-neon-green);
     border-top: 2px solid var(--color-neon-green);
     font-size: 0.85rem;
-    padding: 1.5rem 0 !important;
+    padding: 1.5rem 0;
 }
 
-/* --- 4. COMPONENTS --- */
-
-/* LIST GROUPS: Glowing system components */
 .list-group-item {
     background-color: var(--color-dark-alt);
     border: 1px solid var(--color-neon-blue);
@@ -111,9 +102,7 @@ footer {
     padding: 10px 15px;
     font-size: 0.95rem;
     transition: all 0.2s;
-    
-    /* ADDED: Forces the text color to the light/neon primary */
-    color: var(--color-neon-green) !important; 
+    color: var(--color-neon-green); 
 }
 
 .list-group-item:hover {
@@ -122,9 +111,8 @@ footer {
     transform: translateY(-2px);
 }
 
-/* UNORDERED LISTS (for risks): Differentiating points with neon color */
 #risks ul {
-    list-style: none; /* Remove default bullets */
+    list-style: none;
     padding-left: 0;
 }
 
@@ -135,9 +123,8 @@ footer {
     line-height: 1.5;
 }
 
-/* Custom neon bullet point using the ::before pseudo-element */
 #risks ul li::before {
-    content: '>>'; /* Terminal-style bullet */
+    content: '>>';
     color: var(--color-neon-pink);
     font-weight: bold;
     display: inline-block;
@@ -145,16 +132,20 @@ footer {
     margin-left: -1em;
 }
 
-/* CAROUSEL: Glass or HUD-like appearance */
 .carousel {
     border: 1px solid rgba(255, 0, 255, 0.3);
-    background-color: rgba(10, 10, 26, 0.5); /* Semi-transparent background */
+    background-color: rgba(10, 10, 26, 0.5);
     box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
+.carousel-item img {
+    max-height: 420px;
+    object-fit: cover;
 }
 
 .carousel-caption h5, .carousel-caption p {
     color: var(--color-neon-green);
-    background-color: rgba(0, 0, 0, 0.5); /* Darker text background for legibility */
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 5px;
 }
 
@@ -163,34 +154,29 @@ footer {
     border-radius: 5px;
 }
 
-/* --- 5. BUTTONS (CALL TO ACTION) --- */
-
-/* General button styling to achieve a 'glowing' component look */
 .btn {
     text-transform: uppercase;
     font-weight: bold;
-    border-radius: 0; /* Sharp edges */
+    border-radius: 0;
     padding: 10px 20px;
     transition: all 0.3s ease;
-    box-shadow: none !important; /* Remove default Bootstrap shadows first */
+    box-shadow: none;
 }
 
-/* Primary Button (Local Prevent Team) */
 .btn-primary {
     background-color: var(--color-neon-blue);
     border-color: var(--color-neon-blue);
-    color: var(--color-dark); /* Dark text on neon */
+    color: var(--color-dark);
     box-shadow: 0 0 10px var(--color-neon-blue);
 }
 
 .btn-primary:hover {
-    background-color: #33FFFF; 
-    border-color: #33FFFF;
-    box-shadow: 0 0 15px #33FFFF;
+    background-color: var(--color-neon-blue-light); 
+    border-color: var(--color-neon-blue-light);
+    box-shadow: 0 0 15px var(--color-neon-blue-light);
     transform: scale(1.05);
 }
 
-/* Danger Button (Report Online) */
 .btn-danger {
     background-color: var(--color-neon-pink);
     border-color: var(--color-neon-pink);
@@ -199,13 +185,12 @@ footer {
 }
 
 .btn-danger:hover {
-    background-color: #FF33FF;
-    border-color: #FF33FF;
-    box-shadow: 0 0 15px #FF33FF;
+    background-color: var(--color-neon-pink-light);
+    border-color: var(--color-neon-pink-light);
+    box-shadow: 0 0 15px var(--color-neon-pink-light);
     transform: scale(1.05);
 }
 
-/* Secondary Button (Learn More) */
 .btn-secondary {
     background-color: var(--color-dark-alt);
     border-color: var(--color-neon-green);
@@ -219,13 +204,11 @@ footer {
     transform: scale(1.05);
 }
 
-/* STATUS ALERT: System message style */
 #locStatus {
     transition: all 0.3s ease-in-out;
     font-weight: 500;
     font-size: 1rem;
     border-radius: 0;
-    /* Overrides for Bootstrap alerts to fit theme */
 }
 
 .alert-info {
@@ -242,105 +225,65 @@ footer {
 
 .alert-warning {
     background-color: rgba(255, 255, 0, 0.2);
-    border-color: #FFFF00;
-    color: #FFFF00;
+    border-color: var(--color-neon-yellow);
+    color: var(--color-neon-yellow);
 }
 
-/* --- 6. IMAGES --- */
-
-/* Give images a subtle, digital, screen-like border */
-header img {
-    max-height: 300px;
-    object-fit: cover;
-    border: 2px dashed var(--color-neon-blue);
-    box-shadow: 0 0 10px var(--color-neon-blue);
-    filter: brightness(0.8) saturate(1.2); /* Subtle digital processing look */
-    border-radius: 0 !important; /* Override Bootstrap rounded */
-}
-
-/* Carousel image styling */
-.carousel-item img {
-    max-height: 420px;
-    object-fit: cover;
-}
-
-/* --- 7. MEDIA QUERIES --- */
-
-/* Custom media query example */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2.5rem;
-    }
-}
-
-/* --- 8. FORM COMPONENTS (New Section) --- */
-
-/* Style form labels to use neon-green text */
 .form-label {
-    color: var(--color-neon-green) !important;
+    color: var(--color-neon-green);
     font-size: 0.9rem;
     text-transform: uppercase;
     margin-bottom: 0.25rem;
 }
 
-/* Style all form controls (input, textarea) for the dark/neon look */
 .form-control {
-    background-color: var(--color-dark-alt); /* Darker background */
-    color: var(--color-light); /* Light text for input */
-    border: 1px solid var(--color-neon-blue); /* Neon border */
-    border-radius: 0; /* Sharp edges */
+    background-color: var(--color-dark-alt);
+    color: var(--color-light);
+    border: 1px solid var(--color-neon-blue);
+    border-radius: 0;
     padding: 0.75rem 1rem;
     transition: all 0.3s ease;
 }
 
-/* Focused state: Add the signature neon glow effect */
 .form-control:focus {
     color: var(--color-light);
     background-color: var(--color-dark-alt);
-    border-color: var(--color-neon-pink); /* Pink border on focus */
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.6); /* Pink shadow on focus */
-    outline: 0; /* Remove default focus outline */
+    border-color: var(--color-neon-pink);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+    outline: 0;
 }
 
-/* Placeholder text style (e.g., 'Enter your designation') */
 .form-control::placeholder {
-    color: rgba(192, 192, 192, 0.5); /* Semi-transparent light color */
+    color: rgba(192, 192, 192, 0.5);
     font-style: italic;
 }
 
-
-/* --- 9. MODAL COMPONENTS (New Section) --- */
-
-/* Modal Backdrop */
 .modal-backdrop.show {
     opacity: 0.8;
     background-color: var(--color-dark);
 }
 
-/* Modal Content Box */
 .modal-content {
     background-color: var(--color-dark-alt);
     border: 2px solid var(--color-neon-blue);
     box-shadow: 0 0 15px var(--color-neon-blue);
-    border-radius: 0; /* Sharp edges */
+    border-radius: 0;
 }
 
-/* Modal Header (Title) */
 .modal-header {
     border-bottom: 1px solid var(--color-neon-pink);
     color: var(--color-neon-pink);
 }
 
 .modal-title {
-    color: var(--color-neon-pink); /* Use the pink header style */
+    color: var(--color-neon-pink);
     text-shadow: 0 0 5px var(--color-neon-pink);
 }
 
-/* Close Button Override */
 .btn-close {
     background-color: transparent;
     opacity: 0.7;
-    filter: invert(1) brightness(1.5); /* Makes the 'x' visible and neon-like */
+    filter: invert(1) brightness(1.5);
 }
 
 .btn-close:hover {
@@ -348,12 +291,16 @@ header img {
     filter: invert(1) brightness(2);
 }
 
-/* Modal Body Text */
 .modal-body {
     color: var(--color-light);
 }
 
-/* Modal Footer */
 .modal-footer {
     border-top: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
 }
