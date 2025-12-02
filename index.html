@@ -253,3 +253,61 @@
                 function onPositionSuccess(position) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
+
+                const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
+
+                fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const address = data.address;
+                // Try to find the city, town, or borough name
+                const detectedArea = address.city || address.town || address.borough || address.county || "Unknown";
+                
+                matchAndRedirect(detectedArea);
+            })
+            .catch(error => {
+                console.error(error);
+                showStatus("Error retrieving map data. Please search manually.", "warning");
+                locBtn.disabled = false;
+            });
+    }
+
+    function onPositionError(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+        showStatus("Location access denied or unavailable. Please use the search bar.", "warning");
+        locBtn.disabled = false;
+    }
+
+    function matchAndRedirect(areaName) {
+        let targetUrl = null;
+        let matchedName = "";
+
+        // Fuzzy match: Check if 'Manchester' is inside 'Manchester City Council' or vice versa
+        for (const [key, url] of Object.entries(councilData)) {
+            if (areaName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(areaName.toLowerCase())) {
+                targetUrl = url;
+                matchedName = key;
+                break;
+            }
+        }
+
+        if (targetUrl) {
+            showStatus(`Location found: ${areaName}. Redirecting to ${matchedName} Prevent page...`, "success");
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 1500); // Short delay so user can read the message
+        } else {
+            showStatus(`We located you in <strong>${areaName}</strong>, but we don't have a direct link for this council yet.`, "warning");
+            locBtn.disabled = false;
+        }
+    }
+
+    // Show Status Messages
+    function showStatus(message, type) {
+        statusBox.classList.remove('d-none', 'alert-info', 'alert-success', 'alert-danger', 'alert-warning');
+        statusBox.classList.add(`alert-${type}`);
+        statusBox.innerHTML = message;
+    }
+</script>
+</body>
+</html>
