@@ -239,3 +239,8 @@
     const statusBox = document.getElementById('locStatus');
 
         locBtn.addEventListener('click', function() {
+
+            if (!navigator.geolocation) {
+            showStatus("Geolocation is not supported by your browser.", "danger");
+            return;
+        }
