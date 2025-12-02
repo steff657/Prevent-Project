@@ -20,6 +20,8 @@ body {
     color: var(--color-light);
     font-family: 'Consolas', 'Courier New', monospace; 
     transition: background-color 0.5s, color 0.5s;
+    /* FIX: Added top padding to prevent content from hiding behind the fixed navbar */
+    padding-top: 80px; 
 }
 /* Ensure all text elements use the light color */
 p, li, a {
@@ -269,4 +271,89 @@ header img {
     header h1 {
         font-size: 2.5rem;
     }
+}
+
+/* --- 8. FORM COMPONENTS (New Section) --- */
+
+/* Style form labels to use neon-green text */
+.form-label {
+    color: var(--color-neon-green) !important;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+/* Style all form controls (input, textarea) for the dark/neon look */
+.form-control {
+    background-color: var(--color-dark-alt); /* Darker background */
+    color: var(--color-light); /* Light text for input */
+    border: 1px solid var(--color-neon-blue); /* Neon border */
+    border-radius: 0; /* Sharp edges */
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Focused state: Add the signature neon glow effect */
+.form-control:focus {
+    color: var(--color-light);
+    background-color: var(--color-dark-alt);
+    border-color: var(--color-neon-pink); /* Pink border on focus */
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.6); /* Pink shadow on focus */
+    outline: 0; /* Remove default focus outline */
+}
+
+/* Placeholder text style (e.g., 'Enter your designation') */
+.form-control::placeholder {
+    color: rgba(192, 192, 192, 0.5); /* Semi-transparent light color */
+    font-style: italic;
+}
+
+
+/* --- 9. MODAL COMPONENTS (New Section) --- */
+
+/* Modal Backdrop */
+.modal-backdrop.show {
+    opacity: 0.8;
+    background-color: var(--color-dark);
+}
+
+/* Modal Content Box */
+.modal-content {
+    background-color: var(--color-dark-alt);
+    border: 2px solid var(--color-neon-blue);
+    box-shadow: 0 0 15px var(--color-neon-blue);
+    border-radius: 0; /* Sharp edges */
+}
+
+/* Modal Header (Title) */
+.modal-header {
+    border-bottom: 1px solid var(--color-neon-pink);
+    color: var(--color-neon-pink);
+}
+
+.modal-title {
+    color: var(--color-neon-pink); /* Use the pink header style */
+    text-shadow: 0 0 5px var(--color-neon-pink);
+}
+
+/* Close Button Override */
+.btn-close {
+    background-color: transparent;
+    opacity: 0.7;
+    filter: invert(1) brightness(1.5); /* Makes the 'x' visible and neon-like */
+}
+
+.btn-close:hover {
+    opacity: 1;
+    filter: invert(1) brightness(2);
+}
+
+/* Modal Body Text */
+.modal-body {
+    color: var(--color-light);
+}
+
+/* Modal Footer */
+.modal-footer {
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
 }
