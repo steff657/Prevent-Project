@@ -131,8 +131,10 @@ Tested on various screen sizes using Chrome DevTools:
 ![Desktop](assets/images/test%20results/1200.png)
 
 ### Code Validation
-* **HTML:** Validated via [W3C HTML Validator](https://validator.w3.org/). (No errors found).
-* **CSS:** Validated via [W3C CSS Validator](https://jigsaw.w3.org/css-validator/). (No errors found).
+* **HTML:** Validated via [W3C HTML Validator](https://validator.w3.org/).
+![HTML Result](assets/images/test%20results/html-results.png)
+* **CSS:** Validated via [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).
+![CSS Result](assets/images/test%20results/css-results.png)
 
 ### Manual Testing
 
