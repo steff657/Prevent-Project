@@ -257,7 +257,6 @@
     <p class="mb-0">&copy; 2025 Prevent Information Initiative</p>
 </footer>
 
-<!-- Updated modal with correct ARIA -->
 <div class="modal fade"
      id="confirmationModal"
      tabindex="-1"
@@ -291,7 +290,6 @@
 
 <script>
 
-// Council links
 const councilData = {
     "Doncaster": "https://www.doncaster.gov.uk/services/community-safety/prevent",
     "Manchester": "https://www.manchester.gov.uk/info/200030/crime_antisocial_behaviour_and_nuisance/6429/prevent",
@@ -318,7 +316,6 @@ const requestForm = document.getElementById('requestForm');
 const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
 
 
-// LOCATION FINDER
 locBtn.addEventListener('click', function() {
     if (!navigator.geolocation) {
         displayLocStatus("Geolocation is not supported by your browser.", "danger");
@@ -387,7 +384,6 @@ function displayLocStatus(message, type) {
 }
 
 
-// FORM HANDLING
 requestForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
