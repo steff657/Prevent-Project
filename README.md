@@ -132,6 +132,9 @@ Tested on various screen sizes using Chrome DevTools:
 ![HTML Result](assets/images/test%20results/html-results.png)
 * **CSS:** Validated via [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).
 ![CSS Result](assets/images/test%20results/css-results.png)
+* **Warnings**
+Some warnings were displayed during the CSS validatation but these appear to be common errors when using Bootstrap.
+![Warnings](assets/images/test%20results/css-warning.png)
 
 ### Manual Testing
 
@@ -144,7 +147,16 @@ Tested on various screen sizes using Chrome DevTools:
 | **Contact Form (Empty)** | Click 'Send' without filling inputs. | HTML5 validation prompts user to fill in fields. | ✓ |
 | **Contact Form (Full)** | Fill inputs and click 'Send'. | Modal appears saying "Transmission Successful". | ✓ |
 
----
+<p align="center">
+  <img src="assets/images/gifs/navigation-testing.gif" width="30%" />
+  <img src="assets/images/gifs/carousel-testing.gif" width="30%" />
+  <img src="assets/images/gifs/geo-working.gif" width="30%" />
+</p>
+<p align="center">
+  <img src="assets/images/gifs/geo-error.gif" width="30%" />
+  <img src="assets/images/gifs/contact-check.gif" width="30%" />
+  <img src="assets/images/gifs/contact-complete.gif" width="30%" />
+</p>
 
 ## Bugs
 
