@@ -44,7 +44,7 @@ The design follows a "Neon Cyberpunk" high-contrast theme:
 * **Primary Text:** Silver/Light Grey (`#C0C0C0`)
 * **Accents:** Neon Blue (`#00FFFF`), Neon Pink (`#FF00FF`), and Neon Green (`#39FF14`).
 
-![Colour Palette](assets\images\scheme\colour-scheme.png)
+![Colour Palette](assets/images/scheme/colour-scheme.png)
 
 ---
 
