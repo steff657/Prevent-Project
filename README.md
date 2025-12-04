@@ -122,13 +122,10 @@ The website was tested on the following operating systems to ensure compatibilit
 ### Responsiveness
 Tested on various screen sizes using Chrome DevTools:
 * **320px** (iPhone SE)
-![iphone SE](assets/images/test%20results/320.png)
 * **375px** (iPhone X)
-![iphone X](assets/images/test%20results/375.png)
 * **768px** (iPad Mini)
-![iPad Mini](assets/images/test%20results/768.png)
 * **1200px** (Desktop)
-![Desktop](assets/images/test%20results/1200.png)
+![response](assets/images/test%20results/responsive-test.png)
 
 ### Code Validation
 * **HTML:** Validated via [W3C HTML Validator](https://validator.w3.org/).
