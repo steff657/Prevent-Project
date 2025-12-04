@@ -121,10 +121,10 @@ The website was tested on the following operating systems to ensure compatibilit
 
 ### Responsiveness
 Tested on various screen sizes using Chrome DevTools:
-* **320px** (iPhone SE)
-* **375px** (iPhone X)
-* **768px** (iPad Mini)
-* **1200px** (Desktop)
+* **320px**
+* **375px**
+* **768px** 
+* **1200px**
 ![response](assets/images/test%20results/responsive-test.png)
 
 ### Code Validation
